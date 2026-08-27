@@ -1,0 +1,731 @@
+let ajaxerror="";
+let ajaxdata="";
+function UrlExists(url)
+{
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+	if(http.status==404){return false;}
+	else{return true;}
+    return http.status!=404;
+}
+
+function UrlExists1(url)
+{
+	var request;
+if(window.XMLHttpRequest)
+    request = new XMLHttpRequest();
+else
+    request = new ActiveXObject("Microsoft.XMLHTTP");
+request.open('GET', url, false);
+request.send(); // there will be a 'pause' here until the response to come.
+// the object request will be actually modified
+if (request.status === 404) {
+    return false;
+}
+	return true;
+}
+
+function closemodal()
+{
+
+	jQuery('#myModal').modal('hide');
+}
+function updatecount()
+	{
+		if(jQuery("#comment_body").val().trim()!=""){
+		jQuery("#comment_submit").prop( "disabled", true );
+		jQuery("#comment_submit").val("Sending...");
+		
+		datasend={
+		"comment_body": jQuery("#comment_body").val(),
+		"comment_submit": jQuery("#comment_submit").val(),
+  "task": jQuery("#task").val(),
+  "type": jQuery("#type").val(), 
+  "iden": jQuery("#iden").val(), 
+  "value": jQuery("#value").val(),
+  "user": jQuery("#user").val(),
+  "tab": jQuery("input#tab").val(),
+  "col": jQuery("#col").val(),
+  "tab_parent": jQuery("#tab_parent").val(),
+  "col_parent": jQuery("#col_parent").val(),
+  "child": jQuery("#child").val(),
+  "object_owner_id": jQuery("#object_owner_id").val(),
+  "object_owner": jQuery("#object_owner").val(),
+  "object_id": jQuery("#object_id").val(),
+  "object": jQuery("#object").val()
+		}
+		
+		jQuery.ajax({
+  type: "POST",
+  url: "misc_js.php",
+  data: datasend,
+ success: function (returnedData) {
+	 jQuery("#comment_submit").prop( "disabled", false );
+	 jQuery("#comment_body").val("");
+	 jQuery(".emojionearea-editor").html("");
+	 
+	 jQuery("#comment_submit").val("Post Comment");
+	 loadXMLDoc(1);
+	
+                    },
+  dataType: "text"
+});
+		
+		if(document.getElementById('comment_body').value!=""){
+		total=document.getElementById('totalcomments').innerHTML;
+		total=total*1;
+		document.getElementById('totalcomments').innerHTML=total+1;
+	}
+		}
+	return false;
+	}
+	
+	function updatecount1()
+	{
+		if(jQuery("#comment_body").val().trim()!=""){
+		jQuery("#comment_submit").prop( "disabled", true );
+		jQuery("#comment_submit").val("Sending...");
+		
+		datasend={
+		"comment": jQuery("#comment_body").val(),
+		"comment_submit": jQuery("#comment_submit").val(),
+  "task": jQuery("#task").val(),
+  "type": jQuery("#type").val(), 
+  "iden": jQuery("#iden").val(), 
+  "value": jQuery("#value").val(),
+  "user": jQuery("#user").val(),
+  "tab": jQuery("input#tab").val(),
+  "col": jQuery("#col").val(),
+  "tab_parent": jQuery("#tab_parent").val(),
+  "col_parent": jQuery("#col_parent").val(),
+  "child": jQuery("#child").val(),
+  "object_owner_id": jQuery("#object_owner_id").val(),
+  "object_owner": jQuery("#object_owner").val(),
+  "object_id": jQuery("#object_id").val(),
+  "object": jQuery("#object").val()
+		}
+		
+		jQuery.ajax({
+  type: "POST",
+  url: "comments.php",
+  data: datasend,
+ success: function (returnedData) {
+	 
+	 jQuery("#comment_submit").prop( "disabled", false );
+	 jQuery("#comment_body").val("");
+	 jQuery(".emojionearea-editor").html("");
+	 jQuery("#comment_submit").val("Post Comment");
+	 loadXMLDoc(1);
+	
+                    },
+  dataType: "text"
+});
+		
+		if(document.getElementById('comment_body').value!=""){
+		total=document.getElementById('totalcomments').innerHTML;
+		total=total*1;
+		document.getElementById('totalcomments').innerHTML=total+1;
+	}
+	
+	return false;
+	}
+	}
+	
+	
+loadCSS = function(href) {
+  var cssLink = jQuery("<link>");
+  jQuery("head").append(cssLink); //IE hack: append before setting href
+
+  cssLink.attr({
+    rel:  "stylesheet",
+    type: "text/css",
+    href: href
+  });
+};
+loadCSSbegin = function(href) {
+  var cssLink = jQuery("<link>");
+  jQuery("head").prepend(cssLink); //IE hack: append before setting href
+
+  cssLink.attr({
+    rel:  "stylesheet",
+    type: "text/css",
+    href: href
+  });
+};
+
+function loadjsfile(href)
+{
+	
+jQuery.ajax({
+    url: href,
+	cache: false,
+	async: true,
+    dataType: 'text',
+    success: function(data) {
+        jQuery('<script type="text/javascript">\n' + data + '</script>').appendTo("head");  
+		                
+    }                  
+});
+	
+}
+function loadjsfilebegin(href)
+{
+	
+jQuery.ajax({
+    url: href,
+	cache: false,
+	async: true,
+    dataType: 'text',
+    success: function(data) {
+        jQuery('<script type="text/javascript">\n' + data + '</script>').prependTo("head");  
+		                
+    }                  
+});
+	
+}
+var updateQueryStringParam = function (key, value) {
+
+    var baseUrl = [location.protocol, '//', location.host, location.pathname].join(''),
+        urlQueryString = document.location.search,
+        newParam = key + '=' + value,
+        params = '?' + newParam;
+
+    // If the "search" string exists, then build params from it
+    if (urlQueryString) {
+
+        updateRegex = new RegExp('([\?&])' + key + '[^&]*');
+        removeRegex = new RegExp('([\?&])' + key + '=[^&;]+[&;]?');
+
+        if( typeof value == 'undefined' || value == null || value == '' ) { // Remove param if value is empty
+
+            params = urlQueryString.replace(removeRegex, "$1");
+            params = params.replace( /[&;]$/, "" );
+
+        } else if (urlQueryString.match(updateRegex) !== null) { // If param exists already, update it
+
+            params = urlQueryString.replace(updateRegex, "$1" + newParam);
+
+        } else { // Otherwise, add it to end of query string
+
+            params = urlQueryString + '&' + newParam;
+
+        }
+
+    }
+    window.history.replaceState({}, "", baseUrl + params);
+};
+
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function lepremovecomment()
+  {
+	  id=document.getElementById('del_comment_id1').value;
+	  jQuery('#comment_'+id).fadeOut();
+//	  	document.getElementById('comment_'+id).style.display='none';
+	  
+  }
+
+function lepconfirmprofDelete(id) {
+	  
+    media_id = id;
+    document.getElementById('del_comment_id1').value=id;
+	modalhtml=jQuery('#confirmdelete1').html();
+	  jQuery('#myModal').html(modalhtml);
+	  jQuery('#myModal').modal('show');
+	///TB_show('Delete Comment', '#TB_inline?height=150&width=300&inlineId=confirmdelete1', '', '../images/trans.gif');
+	
+	document.getElementById('del_comment_id1').value=id;
+
+  }
+
+function subtractcount(){
+
+total=document.getElementById('totalcomments').innerHTML;
+
+		total=total*1;
+
+		document.getElementById('totalcomments').innerHTML=total-1;}
+
+function doCommentEdit(commentid)
+  {
+    //var event = new Event(e);
+     
+    document.getElementById("editCommentForm").submit();
+	commentElement = $('profile_comment_body_' + commentid);
+	commentElement.innerHTML=document.getElementById("comment_edit_" + commentid).value;
+    
+    // stop form submission
+    //event.stop();
+  }
+
+function opendivmodal(divtocopy) {
+	  modalhtml='<div class="modal-dialog"><button type="button" class="close main-bg-color alt-text-color orangebg" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button><div class="modal-content" style="background:black; text-align:left;">'+jQuery('#'+divtocopy).html()+'</div></div>';
+	  jQuery('#myModal').html(modalhtml);
+	  jQuery('#myModal').modal('show');
+  }
+
+function opendivmodaladmin(divtocopy) {
+	  modalhtml='<div class="modal-dialog"><button type="button" class="close main-bg-color alt-text-color orangebg" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button><div class="modal-content" style="text-align:left;">'+jQuery('#'+divtocopy).html()+'</div></div>';
+	  jQuery('#myModal').html(modalhtml);
+	  jQuery('#myModal').modal('show');
+  }
+
+function opendivmodaliframe(url) {
+	  modalhtml='<div class="modal-dialog modal-lg" ><button type="button" class="close main-bg-color alt-text-color orangebg" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button><div class="modal-content" style="text-align:left;  height: calc(85vh - 143px);"><iframe id="embeded" style="width:100%; height:100%" src="'+url+'"></iframe></div></div>';
+		
+	  
+	  jQuery('#myModal').html(modalhtml);
+	  jQuery('#myModal').modal('show');
+  }
+function opendivmodaliframesmall(url) {
+	  modalhtml='<div class="modal-dialog" ><button type="button" class="close main-bg-color alt-text-color orangebg" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button><div class="modal-content" style="text-align:left;  height: calc(85vh - 143px);"><iframe id="embeded" style="width:100%; height:100%" src="'+url+'"></iframe></div></div>';
+		
+	  
+	  jQuery('#myModal').html(modalhtml);
+	  jQuery('#myModal').modal('show');
+  }
+function deleteuseraction(i){
+	new Request.JSON({
+		url:"misc_js.php",
+		method:"post",
+		
+		data:{task:"delete_action",action_id:i},
+		onComplete:function(t,e){jQuery("#action_"+i).fadeOut();}
+	}).send();
+}
+
+function likecontent(type, id, elementid, ownerid="", owneruser="")
+	{
+		
+		jQuery.ajax({
+  type: "POST",
+  url: "/misc_js.php",
+  data: "type="+type+"&id="+id+"&task=likecontent&owner_id="+ownerid+"&owner_username="+owneruser,
+  success: function(data){
+	  e=String(data)
+	  e=e.trim();
+	  console.log(typeof e);
+	  console.log(e);
+	  likes = document.getElementById("likes");	 
+	  likes1 = document.getElementById("liketext1");	 
+  if(e=="true")
+  {
+  	jQuery("#"+elementid).addClass('liked');
+	if (likes) { 
+	  total=document.getElementById(elementid+'likes').innerHTML;
+	
+	total=total*1;
+
+
+		document.getElementById(elementid+'likes').innerHTML=total+1;
+		
+}
+	  if (likes1) { document.getElementById('liketext1').innerHTML="Liked"; }
+	  document.getElementById('liketext').innerHTML="Liked";
+  }
+	  else{
+		  jQuery("#"+elementid).removeClass('liked');
+		  if (likes) { total=document.getElementById(elementid+'likes').innerHTML;
+			total=total*1;
+		document.getElementById(elementid+'likes').innerHTML=total-1;		 
+			}
+			if (likes1) { document.getElementById('liketext1').innerHTML="Like"; }
+		   document.getElementById('liketext').innerHTML="Like";
+		  }
+	 
+  }
+  //dataType: 
+});
+		
+	}
+function showthelikes(){
+		
+	content=jQuery("#wholiked").html();
+	jQuery("#myModal").html(content);
+	jQuery(".modal-content").css("background", "black")
+}
+
+function adaddview(id)
+{
+
+}
+function adaddclick(id,page="")
+{
+	jQuery.ajax({
+  type: "POST",
+  url: "misc_js.php",
+  data: "id="+id+"&task=adclick&page="+page,
+ success: function (returnedData) {
+ }
+});
+		
+
+}
+
+function addbookclick(id,page="")
+{
+	jQuery.ajax({
+  type: "POST",
+  url: "misc_js.php",
+  data: "id="+id+"&task=addbookclick&page="+page,
+ success: function (returnedData) {
+ }
+});
+		
+
+}
+
+function addannouncementclick(id,page="")
+{
+	jQuery.ajax({
+  type: "POST",
+  url: "misc_js.php",
+  data: "id="+id+"&task=addannouncementclick&page="+page,
+ success: function (returnedData) {
+ }
+});
+		
+
+}
+
+content="";		
+function changeModalID(id, title="")
+{
+	
+content=jQuery("#"+id).prop('outerHTML');
+	
+	jQuery("#"+id).remove();
+	
+	jQuery("#internalPageModalContent").html(content);
+	
+	jQuery("#"+id).show();
+	jQuery("#internalPageModalTitle").html(title);
+	jQuery(".modal-content").css("background", "black");
+	jQuery(".modal-dialog").css("background", "black")
+	
+	jQuery('#updatestatus').ajaxForm({ 
+                success: function(res, data, x, y){ 
+				//jQuery('#form_div').hide();
+				//jQuery('#success_div').show();
+				//setTimeout(closemodal, 5000);
+					
+					//obj = JSON.parse(res);
+					jQuery("#ajax_currentstatus_value").html(res.status);
+					jQuery("#internalPageModal").modal('hide');
+				
+				}
+            }); 
+	
+ 
+ 
+  
+  //jQuery('#media_desc').html(desc);
+	
+	
+}
+
+globaltask="";
+
+function connecttowss1(wsstask){
+		globaltask=wsstask;
+		 var host = 'wss://mojo.bateworld.com:8080/chatsocket.php?task='+globaltask;
+		connected=false;
+	let socket = new WebSocket(host);
+	
+socket.onopen = function(e) {
+  //alert("[open] Connection established");
+ // alert(grabCookie("user_id"));
+	console.log("Connected")
+	vars=JSON.stringify({
+  task: globaltask,
+  
+	userid: grabCookies("user_id")
+
+  
+  });
+
+  socket.send(vars);
+	connected=true;
+};
+
+socket.onmessage = function(event) {
+  //alert(`[message] Data received from server: ${event.data}`);
+	
+	console.log(event);
+	obj = JSON.parse(event);
+};
+
+socket.onclose = function(event) {
+  if (event.wasClean) {
+    //alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+  } else {
+	  connecttowss1(globaltask);
+	  
+    // e.g. server process killed or network down
+    // event.code is usually 1006 in this case
+    //alert('[close] Connection died');
+  }
+};
+
+		
+	
+  
+
+  document.addEventListener('visibilitychange', function(){
+	
+  if (document.visibilityState === 'hidden') {
+      // highlight-start
+      setTimeout(function(){
+        socket.close();
+		  
+        connected=false;
+      }, 5000);
+      // highlight-end
+    } else {
+      // highlight-start
+      clearTimeout();
+		
+      if (!connected) {
+		  
+       connecttowss1(globaltask);
+        connected=true;
+      }
+      // highlight-end
+    }
+  });
+
+  
+   // document.removeEventListener('visibilitychange', handleVisibilityChange);
+  	
+		
+socket.onerror = function(error) {
+  //alert(`[error] ${error.message}`);
+};
+			
+		}
+		
+		function listCookies1() {
+    var theCookies = document.cookie.split(';');
+    var aString = '';
+    for (var i = 1 ; i <= theCookies.length; i++) {
+        aString += i + ' ' + theCookies[i-1] + "\n";
+    }
+    return aString;
+}
+		
+		function grabCookies(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+	function NotifyUpdate()
+	{
+		//return;
+		//if(countnotifytimes>=60){clearInterval(notify_update_interval);}
+			countnotifytimes++;
+		if(countnotifytimes>=10)
+		{
+			clearInterval(notify_update_interval);
+			notify_update_interval = setInterval(setupnotifications, 4*60*1000);
+		}
+	var a = new Request.JSON({
+				url: "rlmisc_js.php",
+				method: "post",
+				secure: true,
+				data: { task: "notify_get" },
+				onComplete: function (c, d) {
+					SocialEngine.Viewer.userNotifyGenerate(c);
+					SocialEngine.Viewer.userNotifyShow();
+				},
+			}).send();
+
+	}
+
+function submitcommentform(){
+		
+			
+			  var frm = jQuery('#commentform');
+
+    frm.submit(function (e) {
+
+        e.preventDefault();
+
+        jQuery.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                //console.log('Submission was successful.');
+                //console.log(data);
+            },
+            error: function (data) {
+                //console.log('An error occurred.');
+                //console.log(data);
+            },
+        });
+    });
+			
+			return false;
+		}
+
+function submitthisform(form){
+		
+			
+			  var frm = jQuery('#'+form);
+
+   // document.getElementById(form).submit(function (e) {
+
+        //e.preventDefault();
+        jQuery.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+				ajaxdata=data;
+                //console.log('Submission was successful.');
+                console.log(ajaxdata);
+            },
+            error: function (data) {
+				ajaxerror=data;
+                //console.log('An error occurred.');
+                //console.log(data);
+            }
+        });
+  //  });
+		
+			return false;
+		}
+
+function submitthisformreturn(form){
+		
+			
+			  var frm = jQuery('#'+form);
+
+   // document.getElementById(form).submit(function (e) {
+
+        //e.preventDefault();
+       return jQuery.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize()
+        });
+  //  });
+		
+			return false;
+		}
+
+function doCommentEditNew(id)
+  {
+	
+    //var event = new Event(e);
+    submitthisform("editCommentForm");
+	  var commentElement = document.getElementById('profile_comment_body_' + id);
+	  commentElement.innerHTML = jQuery('#comment_edit_'+id).val();
+	  
+	  return;
+  }
+
+function emaillep(calledfrom, user="", url="")
+{
+	jQuery.ajax({
+     
+      url: "https://bateworld.com/emaillep.php?url="+url+"&user="+user+"&function="+calledfrom,
+      
+    });
+}
+function display_photos(id){
+	
+	   jQuery.ajax({
+  url: "/include/display_photos.php?id="+id+"&group_id="+window.group_id,
+  cache: false
+})
+  .done(function( html ) {
+jQuery( ".sitephoto"+id ).html( html );
+  });
+	   }
+		   //
+		
+
+jQuery(function(){
+	display_photos(2);setInterval(function() {display_photos(2)}, 120000);
+  jQuery('.generalizedform').submit(function(event) {
+    event.preventDefault(); // Prevent the form from submitting via the browser
+    var form = jQuery(this);
+    jQuery.ajax({
+      type: form.attr('method'),
+      url: form.attr('action'),
+      data: form.serialize()
+    }).done(function(data) {
+      // Optionally alert the user of success here...
+    }).fail(function(data) {
+      // Optionally alert the user of an error here...
+    });
+  });
+});
+
+function imageerror(img, errorimage="", errorimage2="") {
+  const fallbackLevel = parseInt(img.dataset.fallback || '0', 10);
+
+  if (fallbackLevel === 0) {
+    img.src = errorimage;
+    img.dataset.fallback = '1';
+  } /*else if (fallbackLevel === 1) {
+    img.src = errorimage2;
+    img.dataset.fallback = '2';
+  }*/ else {
+    // Optional: log or visually indicate broken image
+   img.src = 'https://cdn.bateworld.com/images/nophoto.png';
+	  console.log(encodeURIComponent(errorimage));
+	  jQuery.ajax("/misc_js.php?task=bwimagenotthere&h&image="+encodeURIComponent(errorimage));
+	  
+  }
+}
+
+ function loadMoreComments(user="", url1="", p="", type="", customcomments="", tab="", child="", col="", focus="", object_owner="", object_owner_id="", id="", override="", fid="") {
+	
+
+		
+	
+		 
+
+	 let url="/homestorage/grabcomments.php?user="+user+"&p="+p+"&url="+url1+"&type="+type+"&customcomments="+customcomments+"&tab="+tab+"&child="+child+"&col="+col+"&focus="+focus+"&object_owner="+object_owner+"&object_owner_id="+object_owner_id+"&id="+id+"&override="+override+"&"+focus+"="+fid;
+	//show1=show;
+	
+    loading = true;
+
+    jQuery.ajax({
+      url: url,
+      type: 'GET',
+      success: function(data) {
+		  
+		  jQuery("#triggerdiv").remove();
+		  if(override==""){
+		  jQuery("#"+user+'_profile_comments').append(data);
+		  }
+		  else{jQuery("#"+override+'profile_comments').append(data);}
+	
+		   },
+    error: function() {
+      loading = false;   
+    }
+				
+				});
+	}

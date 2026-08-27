@@ -1,0 +1,759 @@
+
+/* -----------needs editing in the style-min page------------ */
+.socialmedia{
+display: flex;
+justify-content: end;
+/* gap: .5em; */
+align-items: center;
+}
+
+
+
+
+.envelope button{
+    background-color: #00000000;
+    border: none;
+}
+
+
+.bell button{
+    background-color: #00000000;
+    border: none;
+}
+/* -------------------------bell and mail notification box--------------------------------------- */
+
+#messagesBtn{
+  position: absolute;      
+  top: -10px;            
+  right: 120px;          
+  z-index: 2100;        
+}
+   
+#messagesBtn, #notificationsBtn{
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#messagesMenu, #notificationsMenu{
+  width: 25%;
+  max-height: 20%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0em;
+  background-color: rgb(26, 26, 26);
+  padding: 0em;
+}
+#messagesMenu .view-more:hover{
+  background-color: rgb(26, 26, 26);
+  
+}
+
+#messagesMenu .title a:hover svg path {
+  fill: rgb(200, 200, 200); 
+}
+
+#messagesMenu .view-more{
+  background-color: rgb(40, 40, 40);
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1em 0em;
+}
+
+#messagesMenu::-webkit-scrollbar {
+  width: 12px;             
+  height: 12px;           
+}
+
+#messagesMenu::-webkit-scrollbar-track {
+  background: rgb(20, 20, 20);       
+}
+
+#messagesMenu::-webkit-scrollbar-thumb {
+  background-color: rgb(40, 40, 40);  
+  border-radius: 6px;       
+  border: 2px solid rgb(20, 20, 20);   
+}
+
+
+
+.dropdown-messages .title{
+  font-weight: 500;
+
+
+  margin: 0em;
+  padding: 1em ;
+  width: 100%;
+  border-bottom: 2px solid rgb(40, 40, 40);
+  display: flex;
+  
+  justify-content: space-between;
+}
+.title .subheading{
+  gap: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ 
+}
+
+
+
+.message-notification {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 1em;
+ border-bottom: 2px solid rgb(40, 40, 40);
+
+}
+
+.message-notification:hover{
+  cursor: pointer;
+  background-color: rgb(40, 40, 40);
+}
+
+.message-notification .user-image{
+  width:70px;
+  height: 70px;
+}
+
+
+.message-notification img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: inline;
+    object-position: center;
+}
+.message-notification .information{
+  width: 85%;
+  padding: 0em  0em 0em 1em;
+}
+
+.message-notification .information .message-notification-text{
+  flex-direction: column;
+  display: -webkit-box; 
+      -webkit-box-orient: vertical; 
+      overflow:hidden;
+      -webkit-line-clamp: 1; 
+      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
+       word-wrap:normal;
+
+
+}
+
+.message-notification .information a{
+  padding: 0em;
+  
+  display: -webkit-box; 
+      -webkit-box-orient: vertical; 
+      overflow:hidden;
+      -webkit-line-clamp: 1; 
+      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
+       word-wrap:normal;
+
+
+}
+
+/* --------- */
+
+#notificationsDropdown{
+  position: absolute; 
+  /* changed       */
+  top: -8px;            
+  right: 90px;          
+  z-index: 2100;        
+}
+
+#notificationsMenu .view-more:hover{
+  background-color: rgb(26, 26, 26);
+  color: white;
+}
+
+#notificationsMenu .view-more{
+  background-color: rgb(40, 40, 40);
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1em 0em;
+}
+
+#notificationsMenu::-webkit-scrollbar {
+  width: 12px;             
+  height: 12px;           
+}
+
+#notificationsMenu::-webkit-scrollbar-track {
+  background: rgb(20, 20, 20);       
+}
+
+#notificationsMenu::-webkit-scrollbar-thumb {
+  background-color: rgb(40, 40, 40);  
+  border-radius: 6px;       
+  border: 2px solid rgb(20, 20, 20);   
+}
+
+.dropdown-notifications .title {
+    font-weight: 500;
+    margin: 0em;
+    padding: 1em;
+    width: 100%;
+    border-bottom: 2px solid rgb(40, 40, 40);
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown-menu .notification {
+  padding: 0em 5em;
+}
+
+
+.dropdown-menu .notification-users img{
+  width: 25px;
+    height: 25px;
+}
+.dropdown-menu .notification-users a{
+  padding: 0em;
+
+}
+
+
+ .dropdown-menu .notification{
+  gap: 1em;
+  padding: 1em 0em;
+  display: flex;
+  align-items: center;
+
+}
+
+
+ .dropdown-menu .notification-icon{
+  margin: 0em 0em 0em 1em ;
+}
+
+.dropdown-menu .notification-info{
+  width: 60%;
+}
+
+.dropdown-menu .notification-comment{
+  width: 90%;
+}
+
+.dropdown-menu .name{
+  width: 90%;
+}
+
+
+
+.dropdown-menu .notification_title a{
+  padding: 0em;
+
+}
+
+.dropdown-menu .confirm-btn a{
+  padding: 0em;
+}
+
+.dropdown-menu .remove-btn a{
+  padding: 0em;
+}
+
+
+.dropdown-menu .notification-friends{
+  flex-direction: row;
+}
+
+
+
+
+
+
+/* ------------------------------------------------- */
+
+
+.notifications-mobile-filters-menu{
+    display: none;
+}
+
+.notifications-mobile-filters{
+        display: none;
+    }
+
+
+.notification-grid{
+    display: flex;
+    flex-direction: row;
+
+}
+
+/* this has been changed */
+.notification-filters{
+  position: sticky;
+  top: 20px;
+  height: 100vh;
+    margin-right: 1rem;
+    width: 100%;
+    background-color:rgb(15, 15, 15) ;
+    padding: 2em;
+    
+    max-width:250px;
+ 
+}
+
+
+
+.notification-title{
+    font-size: 28px;
+    padding-bottom: .5em;
+    border-bottom: solid 2px white;
+    display: flex;
+    align-items: center;
+
+}
+
+.notification-title .title{
+  display: flex;
+  align-items: center;
+  margin: 0px;
+}
+.title h3{
+  margin: 0px;
+  font-size: 20px;
+}
+
+
+
+.notification_result{
+    width: 100%;
+    background-color: rgb(15, 15, 15);
+    border-bottom:solid 2px rgb(39, 39, 39);
+    height: 80px;
+    padding: .5em;
+
+}
+
+.New_notification{
+    background-color: rgb(137, 0, 0);
+    border-bottom: solid 2px white;
+    transition: width 2s, height 4s, background-color 3s;
+}
+
+.New_notification:hover{
+    background-color: rgb(15, 15, 15);
+    border-bottom:solid 2px rgb(39, 39, 39);
+    transition: width 2s, height 4s, background-color 3s;
+}
+
+/* ---------------------- */
+
+
+ 
+  
+  .pill{
+    margin-left:auto;
+    background:#161b24;
+    border:1px solid #232c3a;
+    color:#e7e9ee;
+    border-radius:999px;
+    padding:4px 10px;
+    font-size: 12px;
+    cursor:pointer;
+    font-weight:700
+}
+  .count{
+    display:inline-grid;
+    place-items:center;
+    width: 30px;
+    height: 30px;
+    font-size:12px;
+    background:#a32020;    
+    color:#fff;
+    border-radius:50%;
+    margin-left:8px
+}
+
+  .notifications{
+    display:flex;
+    flex-direction:column;
+    }
+
+
+  /* Each notification */
+  .notification{
+    display:grid;
+    grid-template-columns:auto auto 1fr auto ;
+   
+    padding:1em;
+    
+    border-bottom:2px solid #1a2331;
+    background:rgb(15, 15, 15);
+    outline:none;
+  }
+  
+
+  /* Transition class (controls speed) */
+  .transition-slow{
+    transition: background-color 10s linear, border-color 10s linear, color 10s ease;
+  }
+  /* .transition-fast{
+    transition: background-color 1s linear, border-color 1s linear, color .3s ease;
+  } */
+
+  /* States */
+  .notification.unread{
+    background:rgb(137, 0, 0);
+    color:#e7e9ee;
+    border-color:#e7e9ee
+}
+
+  .notification.read{
+    background:rgb(15, 15, 15);
+    color:rgb(128, 128, 128);
+    
+}
+
+
+
+  @media (prefers-reduced-motion: reduce){
+    .notification.transition-slow,
+    .notification.transition-fast{
+      transition-duration:.1s;
+    }
+  }
+
+  .notification-post{
+    width:70px;
+    height:70px;    
+}
+
+.notification-post img{
+    height: 100%;
+    width: 100%;
+    object-fit:cover;
+    display: inline;
+    object-position: center;
+}
+
+  .notification_title{
+    display:flex;
+    align-items:center;
+    
+    gap:6px;
+    margin-top:6px
+}
+
+
+
+.notification-info{
+
+    overflow: hidden;
+    
+    }
+
+  /* notifications users */
+.notification-users{
+
+display: flex;
+gap: .5em;
+flex-wrap: wrap;
+align-items: center;
+width: 100%;
+
+}
+
+
+.notification-users a {
+  display: inline-block;
+}
+
+.notification-users a.hidden {
+  display: none;
+}
+
+.notification-users .expand-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 5px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: #fff;
+  
+  
+  cursor: pointer;
+}
+
+.notification-users .expand-toggle:focus-visible {
+  outline: 2px solid #888;
+  outline-offset: 2px;
+}
+
+
+
+
+
+.notification-users img{
+    aspect-ratio: 1/1;
+    width:45px;
+    height:45px;
+    object-fit:cover;
+    display: inline;
+    object-position: center;
+}
+
+
+
+
+
+.notification-liked{
+  width: 100%;
+}
+
+
+
+
+
+
+
+.notification-icon{
+    display: flex;
+    align-items: center;
+    margin: 0em 1em;
+
+}
+
+.notification-comment{
+    width: 80%;
+    height: 40px;
+   
+    display: -webkit-box; 
+      -webkit-box-orient: vertical; 
+      overflow:hidden;
+      -webkit-line-clamp: 2; 
+      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
+       word-wrap:normal;
+}
+
+.notification-text{
+    width: 95%;
+    height: 40px;
+   
+    display: -webkit-box; 
+      -webkit-box-orient: vertical; 
+      overflow:hidden;
+      -webkit-line-clamp: 2; 
+      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
+       word-wrap:normal;
+}
+
+
+.notification-friends{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .5em;
+
+}
+
+
+.notification-friends a{
+    color: white;
+}
+
+
+.confirm-btn{
+    background-color: red;
+    padding: .5em;
+    width: 70px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+.confirm-btn:hover{
+    background-color: rgb(176, 0, 0);
+}
+.remove-btn{
+    padding: .5em;
+    width: 70px;
+    background-color: rgb(77, 77, 77);
+    color: white;
+    border: none;
+    border-radius: 6px;
+
+}
+
+.remove-btn:hover{
+    background-color: rgb(40, 40, 40);
+}
+
+
+.btn-unread{
+background-color: rgba(0, 0, 0, 0);
+color: #161b2400;
+}
+
+
+
+
+/* SVG */
+
+.notification.unread .notification-icon path {
+  fill: #ffffffd3;
+  
+}
+
+.notification.read .notification-icon path {
+  fill: #4d4d4d;
+  transition: fill 5s linear; 
+}
+
+.notification .notification-icon svg {
+  width: 2em;    
+  height: 2em;    
+}
+
+
+/* radiobutton */
+
+.notification-filters .radiocheck{
+    height: 22px;
+    width: 22px;
+}
+
+
+/* side footer */
+
+.side-footer{
+  width: 100%;
+  max-width: 170px;
+  margin-left: 1em;
+}
+
+
+
+
+/* mobile */
+ @media (max-width: 1050px) {
+
+    .notification-grid{
+    
+    flex-direction: column;
+    }
+
+    .notification{
+        /* padding: .75em; */
+        align-items: center;
+    }
+
+    .notification-filters{
+        max-width: 100%;
+        padding: 0em;
+        margin-right: 0em;
+        height: 100%;
+        top: 70px;
+
+    }
+    .desktop .radiobutton{
+        
+        display: none;
+    }
+
+    .actions{
+        display: none;
+    }
+
+    .notification-title{
+        padding: .5em;
+    }
+
+    .notification-comment{
+        width: 100%;
+    }
+
+    .notification-info{
+        margin-right: .5em;
+    }
+    .notification-icon{
+        height: 10px;
+
+    }
+
+    .notifications-mobile-filters{
+        display: block;
+        
+    }
+
+    .notifications-mobile-filters button{
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    }
+
+    
+    .notification-title{
+        justify-content: space-between;
+    }
+
+    .notifications-mobile-filters-menu {
+  display: none; 
+  position: fixed;
+  top:  50%;
+  left: 50%;
+  height: 40vh;
+  transform: translate(-50%,-50%);
+  width: 75%;
+  border-radius: 3px;
+  background: rgb(40, 40, 40);
+  font-size: 16px;
+  padding: 3rem;
+}
+
+.notifications-mobile-filters-menu.active-mobile {
+  display: block; /* shown when active */
+}
+
+.mobile-buttons{
+     display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+    gap: 1em;
+    justify-content: center;
+
+}
+.notifications-close {
+    background-color: rgb(77, 77, 77);
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    padding: .5em 1em;
+    width: 100%;
+    
+
+
+}
+
+.mobile-close .notifications-close{
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  padding: .5em;
+  width: 15px;
+  border-radius: 50%;
+  background-color: orange;
+  color: black;
+  font-weight: 700;
+}
+
+
+
+    
+   
+}
